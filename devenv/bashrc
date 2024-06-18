@@ -1,0 +1,10 @@
+[[ $- != *i* ]] && return
+
+PS1="\[\033[1;32m\]\w\$\[\033[0m\] "
+
+shopt -s checkwinsize
+
+alias v=vim
+alias ls='ls --color=auto'
+alias la='ls -lA'
+alias grep='grep --color=auto'
