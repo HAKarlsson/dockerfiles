@@ -1,4 +1,4 @@
-FROM riscv:latest
+FROM hakarlsson/riscv-picolibc:latest
 
 # Update environment
 RUN apt-get update && apt-get upgrade -y

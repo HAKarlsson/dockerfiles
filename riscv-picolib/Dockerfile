@@ -11,7 +11,7 @@ RUN apt-get update \
 RUN git clone https://github.com/riscv-collab/riscv-gnu-toolchain /workdir --depth 1 --branch 2024.04.12 \
     && cd /workdir \
     && ./configure --enable-multilib --with-cmodel=medany \
-    && make \
+    && make -j4 \
     && rm -rf /workdir
 
 RUN git clone https://github.com/picolibc/picolibc /workdir --depth 1 --branch 1.8.6 \
