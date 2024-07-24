@@ -1,15 +1,36 @@
+set nocompatible
+
 call plug#begin()
+Plug 'lervag/vimtex'
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tpope/vim-sleuth'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
+set shortmess+=I 
+set clipboard=unnamedplus
 set mouse=a
 set encoding=UTF-8
 set number
 set modeline modelines=5
 set shell=/bin/bash
 set nobackup noswapfile
+set clipboard=unnamedplus
+set wrap linebreak
+set cursorline
 
 let mapleader=' '
+let maplocalleader=','
+
+let g:vimtex_view_general_viewer = 'evince'
+let g:vimtex_compiler_latexmk = {
+    \ 'out_dir' : 'build',
+    \ 'jobname' : 'build/main',
+    \}
 
 nnoremap <leader><leader> :NERDTreeToggleVCS<cr>
 nnoremap <c-h> <c-w>h
@@ -23,3 +44,8 @@ tnoremap <c-j> <c-w>j
 tnoremap <c-k> <c-w>k
 tnoremap <c-l> <c-w>l
 tnoremap <c-t> <c-w>:vert botright term ++close<cr>
+
+nnoremap j gj
+nnoremap k gk
+
+let g:airline_theme='light'

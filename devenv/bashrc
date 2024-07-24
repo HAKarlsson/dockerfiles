@@ -8,3 +8,5 @@ alias v=vim
 alias ls='ls --color=auto'
 alias la='ls -lA'
 alias grep='grep --color=auto'
+
+. /etc/bash_completion

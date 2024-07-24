@@ -1,26 +1,26 @@
-FROM hakarlsson/riscv-picolibc:latest
+FROM hakarlsson/riscv-picolibc:latest AS devenv
 
 # Update environment
-RUN apt-get update \
- && apt-get upgrade -y \
- && apt-get install -y vim make git curl srecord man \
- && apt-get clean \
+RUN apt-get update\
+ && apt-get upgrade -y\
+ && apt-get install -y vim-gtk3 make git curl srecord man clang clang-format iproute2 xclip bash-completion evince texlive-full\
+ && apt-get clean\
  && rm -rf /var/lib/apt/lists/*
 
 # Setup user
-RUN useradd -d /home/me me
-USER me
-WORKDIR /home/me
+WORKDIR /root
 
 # Bash
-COPY --chown=me bashrc .bashrc
+COPY bashrc .bashrc
+
+# Clang format
+COPY clang-format .clang-format
 
 # Vim
-COPY --chown=me vimrc .vimrc
-RUN curl -fLo ~/.vim/autoload/plug.vim \
-    --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+COPY vimrc .vimrc
+RUN curl -fLo ~/.vim/autoload/plug.vim\
+ --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 RUN vim +PlugUpdate +qa
 
-COPY --chown=me --chmod=755 startup.sh .startup.sh
-
-CMD ["/home/me/.startup.sh"]
+COPY startup.sh .startup.sh
+ENTRYPOINT ["bash", "/root/.startup.sh"]
