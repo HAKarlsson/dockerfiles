@@ -7,7 +7,6 @@ RUN apt-get update\
  && apt-get clean\
  && rm -rf /var/lib/apt/lists/*
 
-# Setup user
 WORKDIR /root
 
 # Bash
@@ -18,9 +17,9 @@ COPY clang-format .clang-format
 
 # Vim
 COPY vimrc .vimrc
-RUN curl -fLo ~/.vim/autoload/plug.vim\
- --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-RUN vim +PlugUpdate +qa
+RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+ && vim +PlugUpdate +qa
 
 COPY startup.sh .startup.sh
+
 ENTRYPOINT ["bash", "/root/.startup.sh"]

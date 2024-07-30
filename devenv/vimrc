@@ -9,6 +9,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
 set shortmess+=I 
@@ -48,4 +49,6 @@ tnoremap <c-t> <c-w>:vert botright term ++close<cr>
 nnoremap j gj
 nnoremap k gk
 
-let g:airline_theme='light'
+set bg=light
+let g:airline_theme='papercolor'
+silent! colorscheme PaperColor
