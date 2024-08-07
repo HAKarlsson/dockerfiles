@@ -3,4 +3,6 @@
 export LANG=C.UTF-8
 export TERM=xterm-256color
 
-exec vim +NERDTreeVCS
+[ -f "env.sh" ] && . env.sh
+
+exec vim
