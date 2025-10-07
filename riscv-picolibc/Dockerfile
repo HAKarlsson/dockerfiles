@@ -6,11 +6,11 @@ RUN apt-get update \
     python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk build-essential \
     bison flex texinfo gperf libtool patchutils bc zlib1g-dev \
     libexpat-dev ninja-build git cmake libglib2.0-dev libslirp-dev \
-    libncurses5-dev meson qemu-system-riscv64 \
+    libncurses5-dev meson qemu-system-riscv64 clang-format cloc \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/riscv-collab/riscv-gnu-toolchain /workdir --depth 1 --branch 2025.07.16 \
+RUN git clone https://github.com/riscv-collab/riscv-gnu-toolchain /workdir --depth 1 --branch 2025.09.28 \
  && cd /workdir \
  && ./configure --enable-multilib --with-cmodel=medany \
  && make -j4 \
