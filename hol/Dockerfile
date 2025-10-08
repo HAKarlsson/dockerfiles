@@ -1,8 +1,8 @@
 FROM debian:latest AS hol
 ENV PATH="$PATH:/hol/bin"
 ENV HOLDIR="/hol"
-RUN apt update && apt install -y git build-essential
-RUN git clone https://github.com/polyml/polyml.git --depth=1 --branch v5.9.1 /polyml \
+RUN apt update && apt install -y git build-essential gnupg2
+RUN git clone https://github.com/polyml/polyml.git --depth=1 --branch v5.9.2 /polyml \
  && cd /polyml \
  && ./configure --prefix=/usr \
  && make \
