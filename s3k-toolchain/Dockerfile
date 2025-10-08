@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM debian:latest AS s3k-toolchain
 
 RUN apt-get update \
  && apt-get upgrade -y \

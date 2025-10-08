@@ -1,4 +1,4 @@
-FROM ubuntu:latest AS riscv-picolibc
+FROM debian:latest AS riscv-picolibc
 
 RUN apt-get update \
  && apt-get upgrade -y \
