@@ -1,4 +1,4 @@
-FROM debian:latest AS riscv-picolibc
+FROM ubuntu:latest AS riscv-picolibc
 
 RUN apt-get update \
  && apt-get upgrade -y \
@@ -6,11 +6,11 @@ RUN apt-get update \
     python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk build-essential \
     bison flex texinfo gperf libtool patchutils bc zlib1g-dev \
     libexpat-dev ninja-build git cmake libglib2.0-dev libslirp-dev \
-    libncurses5-dev meson qemu-system-riscv64 clang-format cloc \
+    libncurses5-dev meson qemu-system-riscv64 clang-format cloc gnupg2 device-tree-compiler \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/riscv-collab/riscv-gnu-toolchain /workdir --depth 1 --branch 2025.09.28 \
+RUN git clone https://github.com/riscv-collab/riscv-gnu-toolchain /workdir --depth 1 --branch 2025.11.04 \
  && cd /workdir \
  && ./configure --enable-multilib --with-cmodel=medany \
  && make -j4 \
