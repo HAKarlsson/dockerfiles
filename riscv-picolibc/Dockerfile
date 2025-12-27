@@ -1,16 +1,19 @@
 FROM ubuntu:latest AS riscv-picolibc
 
+ARG RISCV_VERSION=2025.12.27
+ARG PICOLIBC_VERSION=1.8.10
+
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y autoconf automake autotools-dev curl python3 \
     python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk build-essential \
     bison flex texinfo gperf libtool patchutils bc zlib1g-dev \
     libexpat-dev ninja-build git cmake libglib2.0-dev libslirp-dev \
-    libncurses5-dev meson qemu-system-riscv64 clang-format cloc gnupg2 device-tree-compiler \
+    libncurses5-dev meson qemu-system-riscv64 clang-format cloc gnupg2 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/riscv-collab/riscv-gnu-toolchain /workdir --depth 1 --branch 2025.11.04 \
+RUN git clone https://github.com/riscv-collab/riscv-gnu-toolchain /workdir --depth 1 --branch $RISCV_VERSION \
  && cd /workdir \
  && ./configure --enable-multilib --with-cmodel=medany \
  && make -j4 \
