@@ -1,0 +1,4 @@
+{
+  "name": "hol4-devcontainer",
+  "image": "hakarlsson/hol4-devcontainer:latest"
+}

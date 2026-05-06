@@ -1,13 +1,12 @@
 FROM ubuntu:latest AS hol
 
-# Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update && apt install -y git build-essential gnupg2 python3 wget unzip silversearcher-ag rgrep sudo
+RUN apt update \
+ && apt install -y git build-essential gnupg2 python3 wget unzip silversearcher-ag rgrep sudo psmisc mlton \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
-# HOL ARGUMENTS
-ARG HOL_BRANCH=master
-ARG HOL_DIR=/opt/hol
 
 RUN git clone https://github.com/polyml/polyml.git --depth=1 --branch v5.9.1 /polyml \
  && cd /polyml \
@@ -16,10 +15,14 @@ RUN git clone https://github.com/polyml/polyml.git --depth=1 --branch v5.9.1 /po
  && make install \
  && rm -rf /polyml
 
+ARG HOL_BRANCH=develop
+ARG HOL_DIR=/opt/hol
+ENV HOLDIR="$HOL_DIR"
+
 RUN git clone https://github.com/HOL-Theorem-Prover/HOL.git --depth=1 --branch $HOL_BRANCH $HOL_DIR \
  && cd $HOL_DIR \
- && poly < tools/smart-configure.sml \
+ && poly --script tools/smart-configure.sml \
  && ./bin/build
 
-ENV PATH="$PATH:$HOL_DIR/bin"
-ENV HOLDIR="$HOL_DIR"
+RUN ln -s $HOL_DIR/bin/hol /usr/local/bin/hol \
+ && ln -s $HOL_DIR/bin/Holmake /usr/local/bin/Holmake
